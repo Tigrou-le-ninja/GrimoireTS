@@ -1,0 +1,22 @@
+{
+  "name": "grimoirets_backend",
+  "version": "1.0.0",
+  "description": "OC - Développeur Web - Projet 6",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Tigrou-le-ninja/GrimoireTS.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Tigrou-le-ninja/GrimoireTS/issues"
+  },
+  "homepage": "https://github.com/Tigrou-le-ninja/GrimoireTS#readme",
+  "dependencies": {
+    "express": "^5.1.0"
+  }
+}
