@@ -7,12 +7,12 @@ const sharp = require("../middleware/sharp");
 
 const booksCtrl = require("../controllers/books");
 
-router.get("/", auth, booksCtrl.getAllBooks);
+router.get("/", booksCtrl.getAllBooks);
+router.get("/bestrating", booksCtrl.getBestRating);
 router.post("/", auth, multer, sharp, booksCtrl.createBook);
-router.get("/:id", auth, booksCtrl.getOneBook);
+router.get("/:id", booksCtrl.getOneBook);
 router.put("/:id", auth, multer, sharp, booksCtrl.modifyBook);
 router.delete("/:id", auth, booksCtrl.deleteBook);
-router.get("/bestrating", booksCtrl.getBestRating);
 router.post("/:id/rating", auth, booksCtrl.rateBook);
 
 module.exports = router;

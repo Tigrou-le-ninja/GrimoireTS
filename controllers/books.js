@@ -33,7 +33,7 @@ exports.modifyBook = async (req, res, next) => {
     const bookObject = req.file
       ? {
           ...JSON.parse(req.body.book),
-          imageUrl: `${req.protocol}://${req.get("host")}/images/resized_${req.file.filename}`,
+          imageUrl: `${req.protocol}://${req.get("host")}/images/${req.file.filename}`,
         }
       : { ...req.body };
 
@@ -138,7 +138,7 @@ exports.rateBook = async (req, res, next) => {
       { ratings: newRatings, averageRating: averageGrade, _id: req.params.id }
     );
 
-    return res.status(201).json({ message: "Note ajoutée", averageRating: averageGrade });
+    return res.status(201).json(book);
   } catch (error) {
     return res.status(400).json({ error });
   }
@@ -147,8 +147,8 @@ exports.rateBook = async (req, res, next) => {
 exports.getBestRating = async (req, res, next) => {
   try {
     const books = await Book.find().sort({ averageRating: -1 }).limit(3);
-    return res.status(200).json(books);
+    res.status(200).json(books);
   } catch (error) {
-    return res.status(404).json({ error });
+    res.status(400).json({ error });
   }
 };

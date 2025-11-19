@@ -1,3 +1,6 @@
 #dependencies
 node_modules
 .env
+# Garder le dossier images mais pas son contenu
+images/*
+!images/.gitkeep
