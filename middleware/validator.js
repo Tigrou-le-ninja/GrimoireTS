@@ -1,16 +1,42 @@
-const validator = require("express-validator");
+const { checkSchema, validationResult } = require("express-validator");
 
-module.exports = (req, res, next) => {
-  const { email, password } = req.body;
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
-  if (!email || !emailRegex.test(email)) {
-    return res.status(400).json({ error: "Adresse e-mail invalide." });
-  }
-  if (!password || !passwordRegex.test(password)) {
-    return res
-      .status(400)
-      .json({ error: "Le mot de passe doit contenir au moins 8 caractères, dont au moins une lettre et un chiffre." });
-  }
-  next();
+const userSchema = {
+  email: {
+    in: ["body"],
+    exists: {
+      errorMessage: "L'adresse e-mail est requise.",
+      options: { checkFalsy: true },
+    },
+    isEmail: {
+      errorMessage: "Adresse e-mail invalide.",
+    },
+    trim: true,
+    normalizeEmail: true,
+  },
+  password: {
+    in: ["body"],
+    exists: {
+      errorMessage: "Le mot de passe est requis.",
+      options: { checkFalsy: true },
+    },
+    isLength: {
+      options: { min: 8 },
+      errorMessage: "Le mot de passe doit contenir au moins 8 caractères.",
+    },
+    matches: {
+      options: [/(?=.*[A-Za-z])(?=.*\d)/],
+      errorMessage: "Le mot de passe doit contenir au moins une lettre et un chiffre.",
+    },
+  },
 };
+
+module.exports = [
+  checkSchema(userSchema),
+  (req, res, next) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+    next();
+  },
+];
