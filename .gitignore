@@ -1,6 +1,9 @@
-#dependencies
+# Dépendances
 node_modules
 .env
+
+# Pour la soutenance, le dossier images et son contenu sont suivis par git mais normalement on appliquerait les règles ci-dessous
+
 # Garder le dossier images mais pas son contenu
-images/*
-!images/.gitkeep
+# images/*
+# !images/.gitkeep
