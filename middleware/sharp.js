@@ -2,7 +2,7 @@
  * Middleware pour la conversion d'images en format WebP avec redimensionnement
  *
  * Ce middleware traite les fichiers uploadés en les convertissant au format WebP
- * et en les redimensionnant à une largeur de 300 pixels. Utilise le buffer
+ * et en les redimensionnant aux valeurs attendues par le front. Utilise le buffer
  * au lieu de sauvegarder le fichier sur disque.
  *
  * @async
@@ -40,7 +40,10 @@ module.exports = async (req, res, next) => {
     req.file.filename = newName + ".webp";
     req.file.mimetype = "image/webp";
 
-    const processedBuffer = await sharp(req.file.buffer).resize(300).webp({ quality: 80 }).toBuffer();
+    const processedBuffer = await sharp(req.file.buffer)
+      .resize({ width: 206, height: 260 })
+      .webp({ quality: 80 })
+      .toBuffer();
 
     // url dossier images
     const imagesDir = path.join(__dirname, "..", "images");

@@ -11,7 +11,7 @@ const app = express();
 mongoose
   .connect(
     `mongodb+srv://TheoS:${encodeURIComponent(
-      process.env.DBpassword
+      process.env.DB_PASSWORD
     )}@grimoirets.cvrmgy6.mongodb.net/?appName=GrimoireTS`,
     {
       useNewUrlParser: true,
