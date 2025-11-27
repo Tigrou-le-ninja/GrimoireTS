@@ -22,7 +22,7 @@ const fs = require("fs").promises;
  * - Vérifie la présence d'un fichier dans la requête
  * - Extrait le nom du fichier sans son extension
  * - Traite le buffer de l'image avec Sharp
- * - Redimensionne l'image à 300px de largeur en conservant les proportions
+ * - Redimensionne l'image à la largeur et la hauteur attendues par ke front
  * - Convertit l'image au format WebP
  * - Stocke le buffer résultant dans req.file.buffer
  * - Passe au middleware suivant
