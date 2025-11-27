@@ -1,5 +1,6 @@
 const { checkSchema, validationResult } = require("express-validator");
 
+// Schéma de validation pour les données utilisateur
 const userSchema = {
   email: {
     in: ["body"],

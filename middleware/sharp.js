@@ -1,3 +1,7 @@
+const sharp = require("sharp");
+const path = require("path");
+const fs = require("fs").promises;
+
 /**
  * Middleware pour la conversion d'images en format WebP avec redimensionnement
  *
@@ -26,10 +30,6 @@
  * @requires sharp - Bibliothèque de traitement d'images
  * @module middleware/sharp
  */
-
-const sharp = require("sharp");
-const path = require("path");
-const fs = require("fs").promises;
 
 module.exports = async (req, res, next) => {
   console.log(req.file);

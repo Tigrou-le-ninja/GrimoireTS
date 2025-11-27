@@ -1,12 +1,11 @@
 const express = require("express");
 const router = express.Router();
-
 const auth = require("../middleware/auth");
 const multer = require("../middleware/multer-config");
 const sharp = require("../middleware/sharp");
-
 const booksCtrl = require("../controllers/books");
 
+// Routes pour la gestion des livres
 router.get("/", booksCtrl.getAllBooks);
 router.get("/bestrating", booksCtrl.getBestRating);
 router.post("/", auth, multer, sharp, booksCtrl.createBook);
